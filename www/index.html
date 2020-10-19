@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/loader.js"></script>
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="manifest" href="/manifest.json">
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+  <script async src="https://cdn.jsdelivr.net/npm/pwacompat@2.0.7/pwacompat.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <title>ChaChaMobile</title>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      }).catch(function (err) {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+    }
+  </script>
+</head>
+
+<body onload="showasset()">
+  <!--sidemenu-->
+  <header>
+    <button class="btn-menu">メニュー</button>
+      <nav>
+        <ul>
+          <li ><a href="#" onclick="location.href='./addressbook.html'"><i class="fas fa-book"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;アドレスブック</span></a></li>
+          <li ><a href="#" onclick="location.href='./lergeQR.html'"><i class="fas fa-qrcode"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;My QRコード</span></a></li>
+          <li ><a href="#" onclick="chachacoin()"><i class="fas fa-question"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;チャチャについて</span></a></li>
+          <li ><a href="#" onclick="contact()"><i class="fas fa-phone"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;お問い合わせ</span></a></li>
+          <li ><a href="#" onclick="manual()"><i class="fas fa-blog"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;アプリの使い方</span></a></li>
+        </ul>
+      </nav>
+  </header>
+  <!--Balance-->
+  <div class="Balance">
+    <p class="content1">Your_Balance</p>
+    <p class="content2" id="content2">&nbsp;</p>
+    <p class="content1">ChaChaCoin</p>  
+  </div>
+  <!--Reacent transaction-->
+    <p class="showtransaction">Recent&nbsp;&nbsp;Transaction</p>
+  <!--Recrnt Table-->  
+   <table id="recent">
+     <tbody id="recentTable">
+       <tr>
+         <td id="date">Send_Date</td>
+         <td id="amount">Amount</td>
+       </tr>
+     </tbody>
+   </table>
+  <!--logomark-->
+  <div class="ChaChaCoin">
+  <img id="chacha" src="ChaCha100100.png" alt="ChaChaCoinの画像" >
+  </div>
+  <!--各種button-->
+  <div class="button">
+    <input class="recievebutton" type="button" onclick="location.href='./recieverec.html'" value="チャチャをリクエスト">
+    <input class="sendbutton" type="button" onclick="location.href='./sendinfo.html'" value="チャチャを送金">
+  </div>  
+  <!--QRscaner-->
+  <div class="QRreder">
+    <p class="qrstring">QR起動</p>
+    <button class="QRbutton" type="button" onclick="scanBarcode1()" name="qrreaderbottun"><img src="QR.png" width="65px" height="65px" alt="QRリーダー" /></button>
+  </div>
+  
+<!--サイドメニュースクリプト-->
+  <script type="text/javascript" src="script/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+/*back graund color*/
+body {
+background-color:black
+}
+/*headerメニュー*/
+header {
+  background: rgba(51, 51, 51, 0.692);
+  padding: .1rem;
+  text-align: left;
+}
+/*header文字*/
+p.hstring{
+  display: inline-block;
+  color: yellow;
+  font-size: 1.2rem;
+  margin: auto;
+}
+/*Backpageボタン*/
+.backbutton{
+  border: 1px solid rgb(255, 255, 255);
+  background: transparent;
+  color: #fff;
+  padding: .5rem 1rem;
+  font-size: 1.2rem;
+  cursor: pointer;
+  line-height: 1;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+li {
+  margin: 1rem 0;
+  list-style: none;
+  font-size: 1rem;
+}
+
+/*右端のボタン*/
+.btn-menu{
+  border: none;
+  background: transparent;
+  padding: .5rem 1rem;
+  line-height: 1;
+  color: #fff;
+  font-size: 0.7rem;
+  float: right;
+}
+.dustbox{
+  border: none;
+  background: transparent;
+  padding: .5rem 1rem;
+  line-height: 1;
+  color: #fff;
+  font-size: 1.2rem;
+  float: right;
+}
+/* メニュー */
+nav {
+  background: rgb(66, 65, 65);
+  position: absolute;
+  z-index: 1;
+  top: 3.125rem;
+  right: 0;
+  overflow-x: hidden;
+  text-align: left;
+  width: 0;
+  transition: .5s; 
+}
+/* メニューを開いた時 */
+nav.open-menu {
+  width:70%;
+}
+/*アドレススクロールリスト(ここから下)*/
+thead,tbody{
+  display:block;
+  word-break: break-all;
+}
+tbody{
+  overflow-x: hidden;
+  overflow-y: scroll;
+  height: 600px; 
+}
+/*フォントカラー*/
+th,td{
+  color: white;
+  text-align: left;
+  font-size: 110%;
+}
+#num{
+  color: transparent;
+}
+#registname{
+  height: 40px;
+  width: 90px;
+}
+#Publickey{
+  height: 40px;
+  width: 230px;
+}
+.num{
+  height: 40px;
+  width: 20px;
+}
+.registname{
+  height: 40px;
+  width: 90px;
+}
+#myPublickey{
+  height: 40px;
+  width: 230px;
+  
+}
+table, td{
+    border: none;
+    border-bottom: 1px solid white;
+}
+/*ここまでがtable表*/

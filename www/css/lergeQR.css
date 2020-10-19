@@ -1,0 +1,35 @@
+/*back graund color*/
+body {
+background-color:black;
+}
+/*ChaCha_img*/
+.ChaChaCoin{
+  position: absolute;
+  top : 60px;
+  left : 255px
+}
+/*QR*/
+#lergeqr{
+  position: absolute;
+  top:50%;
+  left: 50%;
+  -webkit-transform : translate(-50%,-50%);
+  transform : translate(-50%,-50%);
+  border: 4px solid;
+  border-color: #ffffff;
+}
+
+.button{
+  position: fixed;
+  left: 10px;
+  bottom: 20px;
+  width: 171px;
+  height: 60px;
+  font-size: 1.2em;
+  font-weight: bold;
+  padding: 10px 5px;
+  background-color:yellow;
+  text-align: center;
+  border: none;
+  border-radius:10px; 
+}

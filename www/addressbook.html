@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="css/addressbook.css">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <script src="components/loader.js"></script>
+</head>
+<body onload="load()">
+  <!--headerメニュー-->
+   <header>
+     <!--前の画面へ-->
+     <button class="backbutton" type="button" onclick="history.back()" value="前のページ"><</button>
+     <p class="hstring">
+     アドレスブック
+     </p>
+     <button class="btn-menu"><i class="fas fa-ellipsis-v fa-2x"></i></button>
+     <button class="dustbox"><i class="fas fa-trash-alt" onclick="Delete()"></i></button>
+     <nav>
+        <ul>
+          <li ><a href="#" onclick="register()"><i class="far fa-clipboard"></i><span>&nbsp;&nbsp;&nbsp;&nbsp;クリップボードを使う</span></a></li>
+          <li ><a href="#" onclick="scanBarcode3()" ><i class="fas fa-qrcode"></i></span>&nbsp;&nbsp;&nbsp;&nbsp;QRリーダを使う</span></a></li>
+        </ul>
+      </nav>
+   </header>
+   <table >
+     <thead>
+       <tr>
+         <th id="num">a</th>
+         <th id="registname">&nbsp;Name</th>
+         <th id="Publickey">&nbsp;PublicKey</th>
+       </tr>
+     </thead>
+     <tbody id="listtable">
+       <tr>
+         <td class="num">番号</td>
+         <td class="registname">自分</td>
+         <td id="myPublickey"></td>
+       </tr>
+     </tbody>
+   </table>
+    <!--メインスクリプト呼び出し-->
+  <script type="text/javascript" src="script/main.js"></script>
+  
+</body>
+</html>

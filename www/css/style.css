@@ -1,0 +1,153 @@
+/*back graund color*/
+body {
+background-color:black
+}
+/*サイドメニュー*/
+/* 基本装飾 */
+header {
+  background: rgba(51, 51, 51, 0.692);
+  padding: .1rem;
+  text-align: left;
+}
+a {
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+li {
+  margin: 1rem 0;
+  list-style: none;
+  font-size: 1.2rem;
+}
+/* ボタン */
+.btn-menu {
+  border: 1px solid rgb(255, 255, 255);
+  background: transparent;
+  color: #fff;
+  padding: .5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  line-height: 1;
+}
+ 
+/* メニュー */
+nav {
+  background: rgb(66, 65, 65);
+  position: absolute;
+  z-index: 1;
+  top: 3.125rem;
+  left: 0;
+  overflow-x: hidden;
+  width: 0;
+  transition: .5s; 
+}
+
+/* メニューを開いた時 */
+nav.open-menu {
+  width:80%;
+}
+/*/サイドメニュー*/
+/*blanceの位置とフォント*/
+.Balance{
+  position: absolute;
+  margin-left: 40px;
+  top: 50px;
+}
+p.content1{
+  color: white;
+  line-height: 5px;
+  text-align: center;
+  font-size: 140%;
+}
+p.content2{
+  color: white;
+  line-height: 15px;
+  text-align: center;
+  font-size: 130%;
+}
+/*ここまでスライドメニュー*/
+/*showtransaction*/
+p.showtransaction{
+  position: relative;
+  color: white;
+  top:100px;
+  font-size: 120%;
+}
+#recent{
+  position: relative;
+  color: white;
+  top:80px;
+  font-size: 115%;
+  text-align: left;
+}
+td{
+  height: 40px;
+}
+#date{
+  width: 210px;
+
+}
+#amount{
+  width: 120px;
+}
+/*ここまでRecent Transaction*/
+/*ChaCha_img*/
+.ChaChaCoin{
+  position: absolute;
+  top : 60px;
+  left : 245px;
+}
+
+/*ボタン位置と形(sendbuttonまで一塊)*/
+.button{
+  position: fixed;
+  width: 100%;
+  left: 0px;
+  bottom: 40px;
+  text-align: center;
+}
+/*リクエストボタン*/
+.recievebutton{
+  position: relative;
+  width: 175px;
+  height: 60px;
+  font-size: 1em;
+  font-weight: bold;
+  margin-left: auto;
+  background-color: yellow;
+  text-align: center;
+  border: none;
+  border-radius:10px; 
+}
+/*sendボタン*/
+.sendbutton{
+  position: relative;
+  width: 165px;
+  height: 60px;
+  font-size: 1em;
+  font-weight: bold;
+  margin-right:auto; 
+  background-color:greenyellow;
+  text-align: center;
+  border: none;
+  border-radius:10px;
+}
+
+/*QRリーダー関連*/
+.QRreder{
+  position: fixed;
+  bottom: 110px;
+  right:  10px;
+}
+p.qrstring{
+  color: yellow;
+  text-align: center;
+}
+/*qrbutton*/
+.QRbutton{
+  position: relative;
+  width: 65px;
+  height: 65px;
+  padding: 0px 0px;
+  border: none;
+}
