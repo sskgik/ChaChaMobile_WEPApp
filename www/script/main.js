@@ -585,6 +585,11 @@ function recenttransaction() {
     newCell.appendChild(newText);
   }
 }
+//プライベートキーの確認
+function showprivatekey(){
+  var privatekey = localStorage.getItem('privatekey');
+  alert("スクリーンショットの保存がお済みで無い場合はスクリーンショットでの保存を推奨します!!\n\nyour privatekey\n\n" + privatekey);
+}
 
 /*以下今後の開発用のメモ*/
 /*var num = prompt("削除するアドレスの番号を入力してください！");
