@@ -214,7 +214,7 @@ function chachacoin() {
     + "ConsensusAlgorithm  :BFK2\n\n"
     + "Processing performance:\n4000 case/Sec\n\n"
     + "About ChaChaCoin\n\n"
-    + "          Infomal Hinatazaka Token");
+    + "Infomal Hinatazaka Token");
 }
 
 //Contactdevelopper
