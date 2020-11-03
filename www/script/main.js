@@ -221,8 +221,8 @@ function chachacoin() {
 function contact() {
   var cont = confirm("公式に質問を行いますか？\n\n" + "質問する場合はOKを押してください!\n（twitterにアクセスします）");
   if (cont == true) {
-    const url = 'https://twitter.com/ChaChaWalletJP'
-    window.open(url, '_blank');
+      //ios用android用
+    window.location.href = 'https://twitter.com/ChaChaWalletJP';
   }
   else {
     return;
@@ -232,8 +232,8 @@ function contact() {
 function manual() {
   var responce = confirm("ユーザーマニュアルに移動しますか？\n\n" + "移動する場合はOKを押してください!\n（blogにアクセスします）");
   if (responce == true) {
-    const url = 'https://chal-convenience-info.net/chachamobile/'
-    window.open(url, '_blank');
+        //IOS用 android用
+    window.location.href = 'https://chal-convenience-info.net/chachamobile/';
   }
   else {
     return;
