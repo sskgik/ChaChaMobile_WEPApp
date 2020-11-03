@@ -338,56 +338,77 @@ function Delete() {
   }
 }
 //コインの送金情報に関して
-function send() {
-  var button = document.getElementById("sendbutton");
+function send(){
+  var button = document.getElementById('sendbutton');
+  var returnbutton = document.getElementById('returnbutton');
   button.disabled = true;
+  returnbutton.disabled = true;
   var myprivatekey = localStorage.getItem('privatekey');
   var destinationpubkey = deistination.value;
   var coinamount = amount.value;
-  if (destinationpubkey == "" || coinamount == "") {
+  if(destinationpubkey == "" || coinamount == ""){
     alert("空白のテキストボックス があります！\n入力してください！");
     button.disabled = false;
+    returnbutton.disabled = false;
     return;
   }
-  var Transactioninfo = {
-    my_privatekey: myprivatekey,
-    opponet_pubkey: destinationpubkey,
-    send_amount: coinamount
+  var Transactioninfo={
+    my_privatekey:myprivatekey,
+    opponet_pubkey:destinationpubkey,
+    send_amount:coinamount
   }
   var json = JSON.stringify(Transactioninfo);
   alert(json);
 
   $.ajax({
-    type: "post",                     //method = "post"
-    url: "https://chachacoin.net/~",             // POST送信先のURL
-    data: JSON.stringify(Transactioninfo),   // JSONデータ本体
+    type:"post",                     //method = "post"
+    url:"https://chachacoin.net/~",             // POST送信先のURL
+    data:JSON.stringify(Transactioninfo),   // JSONデータ本体
     contentType: 'application/json', // リクエストの Content-Type
     dataType: "json",                // レスポンスをJSONとしてパースする
     timespan: 10000,                  // 通信のタイムアウト(10秒)
-  }).done(function (Result) {//Result;レスポンスのJSON,textStatus通信結果のステータス リクエスト成功時
+  }).done(function(Result){//Result;レスポンスのJSON,textStatus通信結果のステータス リクエスト成功時
     var code1 = Result.code;
-    switch (code1) {
+    switch(code1){
       case 1:
-        alert("プライベートキーが適正な値ではありません！");
-        break;
+      alert("プライベートキーが適正な値ではありません！");
+      button.disabled = false;
+      returnbutton.disabled = false;
+      break;
       case 2:
-        alert("自分のプライベートキーから変換に失敗しました！\n開発者にお問い合わせください！");
-        break;
+      alert("自分のプライベートキーから変換に失敗しました！\n開発者にお問い合わせください！");
+      button.disabled = false;
+      returnbutton.disabled = false;
+      break;
       case 3:
-        alert("入力された送信者のパブリックキーが不適当です！\n入力値を再入力してください！");
-        break;
+      alert("入力された送信者のパブリックキーが不適当です！\n入力値を再入力してください！");
+      button.disabled = false;
+      returnbutton.disabled = false;
+      break;
       case 4:
-        alert("数字でない文字が入力されています！\n数字を入力してください！");
-        break;
+      alert("数字でない文字が入力されています！\n数字を入力してください！");
+      button.disabled = false;
+      returnbutton.disabled = false;
+      break;
       case 5:
-        alert("送信に成功しました！\n\ntransactionID:\n" + Result.transactionId + "\n\nSend_Result:\n" + Result.result);
-        hystorylog(coinamount);
+      if(Result.result == "Success"||Result.result == "success"){
+      alert("送信に成功しました！\n\ntransactionID:\n"+ Result.transactionId + "\n\nSend_Result:\n"+Result.result);
+      button.disabled = false;
+      returnbutton.disabled = false;
+      hystorylog(coinamount);//ローカルストレージに送金履歴を保存
+      }
+      else{
+        alert(Result.result + "\n\n送金していません！");
+        button.disabled = false;
+        returnbutton.disabled = false;
+      }   
     };
     //HTTPレスポンスが失敗で帰ってきた場合
-  }).fail(function (jqXHR, textStatus, errorThrown) {
-    alert("HTTPレスポンスの結果\n" + jqXHR.status + "\n" + textStatus + "\n" + errorThrown + "\n再度送金を試してください！\nもう一度試してエラーの場合はお問い合わせください！");
-  });
-  button.disabled = false;
+  }).fail(function(jqXHR,textStatus, errorThrown){
+    alert("HTTPレスポンスの結果\n"+jqXHR.status+"\n"+textStatus+"\n"+errorThrown+"\n再度送金を試してください！\nもう一度試してエラーの場合はお問い合わせください！");
+    button.disabled = false;
+    returnbutton.disabled = false;
+  });      
 }
 //ローカルストレージ のプライベートキーの有無確認とブロックチェーンからデータの取得 
 function showasset() {
@@ -438,6 +459,29 @@ function showasset() {
     document.getElementById("content2").innerHTML = "ー";
   });
 }
+//バランス更新のボタン
+function get_balance(){
+  var row = recent.rows.length;
+  while( recent.rows[ 1 ] ) recent.deleteRow( 1 );
+  recenttransaction();
+  var mypublickey=localStorage.getItem('publickey');// ローカルストレージに保存されたパブリックキー を呼び出す
+  var Showamount={
+    my_publickey:mypublickey
+  };
+  $.ajax({
+    type:"post",                    //method = "post"
+    url:"https://chachacoin.net/~",        // POST送信先のURL
+    data:JSON.stringify(Showamount), // JSONデータ本体
+    contentType: 'application/json', // リクエストの Content-Type
+    dataType: "json",               // レスポンスをJSONとしてパースする
+    timespan: 5000,                  // 通信のタイムアウト(5秒)
+ }).done(function(Showresult,textStatus){//Result;レスポンスのJSON,textStatus通信結果のステータス リクエスト成功時
+    var show = Showresult.coin_amount;
+    document.getElementById("content2").innerHTML = show;
+    }).fail(function(jqXHR,textStatus, errorThrown){
+    document.getElementById("content2").innerHTML = "ー";
+  });
+}
 //テキストボックスにfocusされたとき
 //送信情報画面起動時のlocalstrage呼び出し
 function detection() {
@@ -470,41 +514,40 @@ function detection() {
 }
 
 //裏オプション
-$('#chacha').bind('touchend', function () {
-  clearInterval(timer1);
-});
-$('#chacha').bind('touchstart', function () {
-  timer1 = setTimeout(function () {
+function backoption(){
+    var scan = localStorage.getItem('privatekey');
+    if(scan){
+      return;
+    }
     var privatekey = prompt("Please paste your Privatekey\n\n(＊プライベートキーを再登録する時のみ使ってください！)");
-    if (privatekey) {
-      var MyPrivateKey = {
-        BeforeParsePrivateKey: privatekey
-      };
-      $.ajax({
-        type: "post",                     //method = "post"
-        url: "https://chachacoin.net/~",             // POST送信先のURL
-        data: JSON.stringify(MyPrivateKey), // JSONデータ本体
-        contentType: 'application/json', // リクエストの Content-Type
-        dataType: "json",                // レスポンスをJSONとしてパースする
-        timespan: 5000,                  // 通信のタイムアウト(5秒)
-      }).done(function (parsepublickey, textStatus) {//Result;レスポンスのJSON,textStatus通信結果のステータス リクエスト成功時
-        if (parsepublickey.AfterParsepublickey == null || parsepublickey.AfterParsepublickey == "") {
-          alert("登録したprivatekeyが誤っている可能性があります！\n再度保存のキー文字列を確認して登録ください！");
-          return;
-        }
-        var Key = parsepublickey.AfterParsepublickey;
-        localStorage.setItem('privatekey', privatekey);
-        localStorage.setItem('publickey', Key);
-        alert("your publickey\n\n" + Key + "\n\nComplete Regist Privatekey&PublicKey your localstorage\n");
-      }).fail(function (jqXHR, textStatus, errorThrown) {
-        alert("PublicKeyの取得に失敗しました！\n再度行いダメな場合は開発者に連絡ください！\n");
-      });
+    if(privatekey){
+    var MyPrivateKey={
+    BeforeParsePrivateKey:privatekey
+    };
+  $.ajax({
+    type:"post",                     //method = "post"
+    url:"https://chachacoin.net/~",             // POST送信先のURL
+    data:JSON.stringify(MyPrivateKey), // JSONデータ本体
+    contentType: 'application/json', // リクエストの Content-Type
+    dataType: "json",                // レスポンスをJSONとしてパースする
+    timespan: 5000,                  // 通信のタイムアウト(5秒)
+ }).done(function(parsepublickey,textStatus){//Result;レスポンスのJSON,textStatus通信結果のステータス リクエスト成功時
+    if(parsepublickey.AfterParsepublickey == null ||parsepublickey.AfterParsepublickey == ""){
+    alert("登録したprivatekeyが誤っている可能性があります！\n再度保存のキー文字列を確認して登録ください！");
+    return;
     }
-    else {
-      alert("PrivateKeyの登録を行いませんでした！");
-    }
-  }, 2000);
-});
+    var Key = parsepublickey.AfterParsepublickey;
+    localStorage.setItem('privatekey',privatekey);
+    localStorage.setItem('publickey',Key);
+    alert("your publickey\n\n"+Key+"\n\nComplete Regist Privatekey&PublicKey your localstorage\n");
+    }).fail(function(jqXHR,textStatus, errorThrown){
+    alert("PublicKeyの取得に失敗しました！\n再度行いダメな場合は開発者に連絡ください！\n");
+  });
+      }
+      else{
+        alert("PrivateKeyの登録を行いませんでした！");
+      }
+}
 //recent transactionの記録
 function hystorylog(amount) {
   var a = localStorage.getItem('date1');
